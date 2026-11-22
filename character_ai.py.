@@ -1,0 +1,47 @@
+
+import random
+
+class AICharacter:
+    def __init__(self, name, personality, greeting):
+        self.name = name
+        self.personality = personality
+        self.greeting = greeting
+        self.memory = []
+
+    def respond(self, message):
+        self.memory.append(("User", message))
+
+        responses = [
+            f"That's interesting! Tell me more.",
+            f"I see what you mean.",
+            f"Really? I didn't expect that!",
+            f"Why do you think that?",
+            f"Let's talk more about it."
+        ]
+
+        answer = random.choice(responses)
+
+        self.memory.append((self.name, answer))
+        return answer
+
+
+# Create an AI character
+character = AICharacter(
+    name="Luna",
+    personality="Friendly, curious and intelligent",
+    greeting="Hello! I'm Luna. What's on your mind?"
+)
+
+print(character.name + ": " + character.greeting)
+
+# Chat loop
+while True:
+    user_message = input("You: ")
+
+    if user_message.lower() == "exit":
+        print("Goodbye!")
+        break
+
+    response = character.respond(user_message)
+    print(character.name + ": " + response)
+    
